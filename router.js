@@ -1,5 +1,5 @@
 import express from 'express'
-import { homeController } from './controller/HomeController.js'
+import { homeController } from './src/controller/HomeController.js'
 import {
     deleteMessage,
     getAllMessages,
@@ -7,7 +7,7 @@ import {
     patchMessage,
     postMessage,
     putMessage
-} from './controller/MessageController.js'
+} from './src/controller/MessageController.js'
 
 const router = express.Router()
 
@@ -15,12 +15,12 @@ const router = express.Router()
 router.get('/', homeController)
 
 // Messages route
-router.get('/messages', getAllMessages)
-router.get('/messages/:id', getOneMessage)
-router.post('/messages', postMessage)
-router.patch('/messages', patchMessage) // patch modifie partiellement
-router.put('/messages', putMessage) // put remplace
-router.delete('/messages', deleteMessage)
+router.get('/message', getAllMessages)
+router.get('/message/:id', getOneMessage)
+router.post('/message', postMessage)
+router.patch('/message', patchMessage) // patch modifie partiellement
+router.put('/message', putMessage) // put remplace
+router.delete('/message', deleteMessage)
 // end Messages route
 
 

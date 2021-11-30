@@ -2,31 +2,42 @@ import express from 'express'
 import http from 'http'
 import router from './router.js'
 import nunjucks from 'nunjucks'
+import { initMongoose } from './database/database.js'
 
-const app = express()
-const server = http.createServer(app)
-nunjucks.configure('views', {
-    autoescape: true,
-    express: app
+initMongoose().then(() => {
+    console.log("Database connected")
+    startWebServer()
+}).catch((err) => {
+    console.log(err)
 })
 
-app.use((req, res, next) => {
-    console.log(req.url)
-    next()
-})
+function startWebServer() {
+    const app = express()
+    const server = http.createServer(app)
+
+    nunjucks.configure('src/views', {
+        autoescape: true,
+        express: app
+    })
+
+    app.use((req, res, next) => {
+        console.log(req.url)
+        next()
+    })
 
 //
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+    app.use(express.json())
+    app.use(express.urlencoded({extended: true}))
 
-// service de fichiers statique
-app.use(express.static('public'))
-app.use(express.static('views'))
+// services de fichiers statique
+    app.use(express.static('public'))
+    app.use(express.static('src/views'))
 
-app.use(router)
+    app.use(router)
 
 
 
-server.listen(8000, '127.0.0.1', () => {
-    console.log(`Listening on http://127.0.0.1:8000`)
-})
+    server.listen(8000, '127.0.0.1', () => {
+        console.log(`Listening on http://127.0.0.1:8000`)
+    })
+}
