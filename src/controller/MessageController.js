@@ -14,6 +14,7 @@ export async function getOneMessage(request, response) {
 }
 
 export async function postMessage(request, response) {
+    console.log(request.body)
     const message = await createMessage(request.body.creator, request.body.text)
     response.status(200).send(message)
 }

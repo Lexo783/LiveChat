@@ -8,11 +8,15 @@ import {
     postMessage,
     putMessage
 } from './src/controller/MessageController.js'
+import {LiveTchatController} from "./src/controller/LiveTchatController.js";
 
 const router = express.Router()
 
 // home page
 router.get('/', homeController)
+
+// live Tchat : mettre un midleWare qui va verif la connexion et ci besoin va return la vue de connexion
+router.get('/live_tchat',LiveTchatController)
 
 // Messages route
 router.get('/message', getAllMessages)
