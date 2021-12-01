@@ -9,9 +9,9 @@ import {
     putMessage
 } from './src/controller/MessageController.js'
 import {LiveTchatController} from "./src/controller/LiveTchatController.js";
-import requireAuth from "./src/middleware/requireAuth.js"
-
 import { AdminController } from './src/controller/AdminController.js';
+import requireAuth from "./src/middleware/requireAuth.js"
+import {signOut} from "./src/controller/AuthSecurity.js"
 
 const router = express.Router()
 
@@ -19,7 +19,8 @@ const router = express.Router()
 router.get('/', homeController)
 
 // live Tchat : mettre un midleWare qui va verif la connexion et ci besoin va return la vue de connexion
-router.get('/live_tchat',requireAuth,LiveTchatController)
+router.get('/live_tchat', requireAuth, LiveTchatController)
+router.get('/logout', signOut)
 
 // Messages route
 router.get('/message', getAllMessages)
