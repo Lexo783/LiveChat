@@ -6,9 +6,3 @@ export async function createMessage(creator = 0, text = "", room = 0) {
     })
     return message
 }
-
-export async function getAllMessage(){
-    const messages = await Message.find()
-    return messages
-}
-
