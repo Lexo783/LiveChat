@@ -2,22 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tchatos Machine</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </script>
+    <title>ChatLive</title>
 </head>
 <body>
-    <div>
-        <h1>Tchatos de déglingos</h1>
-    </div>
-    <div>
-        <div class="ici les messages">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <h1>Chat</h1>
+                </div>
+                <div class="row">
+                    <div class="btn-group col-md-8 bg-secondary">
+                        <a href="#" class="btn active" aria-current="page">Active link</a>
+                        <a href="#" class="btn">Link</a>
+                        <a href="#" class="btn">Link</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="chat row">
+                    <p>Hello</p>
+                    <p>Hello :)</p>
+                </div>
+                <div class="message row">
+                    <form method="post" action="/message">
+                        <input type="text" placeholder="Your message">
+                        <input type="submit" placeholder="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        </div>
-        <div class="zone d'écriture">
-            <form method="post" action="/message">
-                <input name="text" placeholder="Ecrire ici">
-                <input type="submit" placeholder="submit">
-            </form>
-        </div>
+    
     </div>
 </body>
 </html>
