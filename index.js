@@ -3,6 +3,8 @@ import http from 'http'
 import router from './router.js'
 import nunjucks from 'nunjucks'
 import { initMongoose } from './database/database.js'
+import passport from 'passport'
+import {jwtLogin, localLogin} from './src/controller/AuthSecurity.js'
 
 initMongoose().then(() => {
     console.log("Database connected")
@@ -26,6 +28,9 @@ function startWebServer() {
     // services de fichiers statique
     app.use(express.static('public'))
     app.use(express.static('src/views'))
+
+    passport.use(jwtLogin);
+    passport.use(localLogin);
 
     app.use(router)
 
