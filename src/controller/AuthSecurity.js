@@ -1,6 +1,5 @@
 import passportLocal from "passport-local";
 import passport from "passport";
-// user
 import User  from "../model/User.js";
 import bcrypt from "bcryptjs";
 import Cookies from "cookies";
@@ -34,7 +33,8 @@ const localLogin = new LocalStrategy(
         });
     }
 );
-function signIn(res, req, next) {
+
+function signIn(req, res, next) {
     passport.authenticate("local", { session: false }, (err, email, infos) => {
         if (err) {
             return res.status(500).json("impossible de se connecter");
