@@ -1,6 +1,6 @@
 import passportLocal from "passport-local";
 import passport from "passport";
-import User  from "../model/User.js";
+import {getOneUser} from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
 import Cookies from "cookies";
 import jwt from "jsonwebtoken";
@@ -18,16 +18,19 @@ const LocalStrategy = passportLocal.Strategy;
 const localLogin = new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
-        const user = await User.findOne({ email: email });
+        const user = await getOneUser(email );
         if (email !== user.email) {
             return done(null, false, { error: "email incorrect" });
         }
         await bcrypt.compare(password, user.password, (err, match) => {
             if (err) {
+                console.log('err', err)
                 return done(null, false, { error: "email incorrect" });
             } else if (!match) {
+                console.log("MATCH")
                 return done(null, false, { error: "email incorrect" });
             } else {
+                console.log('jysuis')
                 return done(null, email);
             }
         });
@@ -35,10 +38,11 @@ const localLogin = new LocalStrategy(
 );
 
 function signIn(req, res, next) {
+    console.log(req.body)
     passport.authenticate("local", { session: false }, (err, email, infos) => {
-        if (err) {
-            return res.status(500).json("impossible de se connecter");
+        if (err) {return res.status(500).json("impossible de se connecter");
         } else if (!email) {
+            console.log(email, 'iciiiii')
             return res.status(500).json("impossible de se connecter");
         } else {
             const timestamp = new Date().getTime() / 1000;

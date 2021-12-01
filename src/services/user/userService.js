@@ -1,20 +1,23 @@
 import User from "../../model/User.js";
 
-export async function createUser(email, pseudo) {
-    const user = await User.create({
-        email, pseudo
+export async function createUser(email, pseudo, password) {
+    return await User.create({
+        email, pseudo, password
     })
-    return user
 }
 
 export async function getAllUsers(){
-    const users = await User.find()
-    return users 
+    return await User.find()
+}
+
+export async function getOneUser(email){
+    return await User.findOne({email});
 }
 
 export async function deleteUser(id){
-    const deleteUser = await User.deleteOne({
-        ' _id' : `ObjectId(${id})`
-    })
-    return deleteUser
+    return await User.deleteOne({
+        id: `ObjectId(${id})`
+    });
 }
+
+
