@@ -9,6 +9,7 @@ import {
     putMessage
 } from './src/controller/MessageController.js'
 import {LiveTchatController} from "./src/controller/LiveTchatController.js";
+import { AdminController } from './src/controller/AdminController.js';
 
 const router = express.Router()
 
@@ -26,6 +27,9 @@ router.patch('/message', patchMessage) // patch modifie partiellement
 router.put('/message', putMessage) // put remplace
 router.delete('/message', deleteMessage)
 // end Messages route
+
+// admin route 
+router.get('/admin', AdminController)
 
 
 export default router
