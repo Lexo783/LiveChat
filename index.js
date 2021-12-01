@@ -19,17 +19,11 @@ function startWebServer() {
         autoescape: true,
         express: app
     })
-
-    app.use((req, res, next) => {
-        console.log(req.url)
-        next()
-    })
-
-//
+    // config json
     app.use(express.json())
     app.use(express.urlencoded({extended: true}))
 
-// services de fichiers statique
+    // services de fichiers statique
     app.use(express.static('public'))
     app.use(express.static('src/views'))
 
