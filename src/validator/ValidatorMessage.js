@@ -4,5 +4,6 @@ const valid = new Validator()
 
 const schema = {
     creator: {type: "number", positive: true, integer: true},
-    text: {type: 'string',min: 3, max: 255}
+    text: {type: 'string',min: 3, max: 255},
+    room: {type: "number", positive: true, integer: true},
 }
