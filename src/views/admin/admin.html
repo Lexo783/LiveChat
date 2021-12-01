@@ -8,15 +8,32 @@
 </head>
 <body>
     <h1>{{ h1 }} </h1>
-  
+    <div class="create-user-div">
+        <h2>{{ formCreate }}</h2>
+        <form method="post" action="/createUser">
+            <input name="pseudo" type="text" placeholder="pseudo">
+            <input name="email" type="email" placeholder="email">
+            <input type="submit" placeholder="submit">
+        </form>
+    </div>
     <ul>
         <div class="user-wrapper">
+            
             {% for item in users %}
-            <li>{{ item.pseudo }}</li>
+            <li>
+                <h2>{{ pseudo }}</h2>
+                {{ item.pseudo }}
+                <h3>{{ id }}</h3>
+                {{ item. _id }}
+                <form method="post" action="/deleteUser">
+                    <input name="id" type="hidden" value="{{ item. _id }}">
+                    <input type="submit" placeholder="submit" value="Supprimer">
+                </form>
+            </li>
             {% else %}
-            <li>Cela devrait s'afficher si la collection 'item' est vide</li>
+            <li>Aucun utilisateur à afficher</li>
             {% endfor %}
-            <button>Supprimer</button>
+            
         </div>
     </ul>
 </body>
