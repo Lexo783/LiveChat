@@ -19,8 +19,8 @@
   font-size: 21px;
   margin: auto;
 }
-.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
-.chat_ib h5 span{ font-size:13px; float:right;}
+.chat_ib a{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+.chat_ib a span{ font-size:13px; float:right;}
 .chat_ib p{ font-size:14px; color:#989898; margin:auto}
 
 .chat_ib {
