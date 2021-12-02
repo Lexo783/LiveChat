@@ -10,33 +10,78 @@
     <h1>{{ h1 }} </h1>
     <div class="create-user-div">
         <h2>{{ formCreate }}</h2>
-        <form method="post" action="/createUser">
-            <input name="pseudo" type="text" placeholder="pseudo">
-            <input name="email" type="email" placeholder="email">
-            <input  name="password" type="password" placeholder="Password" id="password" required/>
-            <input type="submit" placeholder="submit">
+        <form id="form_create">
+            <input name="email" type="email" placeholder="email" id="email" required>
+            <input name="pseudo" type="text" placeholder="pseudo" id="pseudo" required>
+            <input name="password" type="password" placeholder="Mot de passe" id="password" required>
+            <button type="submit">Générer</button>
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                const form = document.querySelector("#form_create");
+                form.addEventListener("submit", async event => {
+                    event.preventDefault();
+                    const email = document.querySelector('#email').value;
+                    const pseudo = document.querySelector('#pseudo').value;
+                    const password = document.querySelector('#password').value;
+                    data = {email: email, pseudo: pseudo, password: password}
+                    console.log(data)
+                    axios({
+                        method: "post",
+                        url: "/createUser",
+                        data: data
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((err) => {
+                            throw err;
+                        });
+                });
+            });
+        </script>
     <ul>
         <div class="user-wrapper">
-            
-            {% for item in users %}
+                {% for item in users %}
             <li>
                 <h2>{{ pseudo }}</h2>
                 {{ item.pseudo }}
+                <h2>{{ email }}</h2>
+                {{ item.email }}
+                <h3>{{ password }}</h3>
+                {{ item.password }}
                 <h3>{{ id }}</h3>
                 {{ item. _id }}
-                <h4>PASS</h4>
-                {{ item.password }} <= le mdp
-                <form method="post" action="/deleteUser">
-                    <input name="id" type="hidden" value="{{ item. _id }}">
+                <form id="form_delete">
+                    <input id="input_id" type="hidden" value="{{ item. _id }}">
                     <input type="submit" placeholder="submit" value="Supprimer">
                 </form>
             </li>
             {% else %}
             <li>Aucun utilisateur à afficher</li>
-            {% endfor %}
-            
+            {% endfor %}   
+            <script>
+                window.addEventListener("load", () => {
+                    const form = document.querySelector("#form_delete");
+                    form.addEventListener("submit", async event => {
+                        event.preventDefault();
+                        const data = document.querySelector('#input_id').value;
+                        axios({
+                            method: "post",
+                            url: "/deleteUser",
+                            data: data
+                        })
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((err) => {
+                            throw err;
+                        });
+                    });
+                });
+            </script>
         </div>
     </ul>
 </body>
