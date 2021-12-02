@@ -1,13 +1,21 @@
-import {getAllUsers} from "../services/admin/adminService.js";
+import {getAllUsers} from "../services/user/userService.js";
+import {deleteUser} from "../services/user/userService.js";
+import { createUser } from "../services/user/userService.js";
+
+import { removeUser } from "./UserController.js";
+/*import { modifyUser } from "../services/user/userService.js";*/
 
 export async function AdminController(request, response) {
     var users = await getAllUsers()
-    console.log('user :',users[1].email);
+    
     response.render('admin/admin.html',{
         title : 'admin',
         h1 : 'Gestion des utilisateurs',
-        users : users
+        pseudo : 'Pseudo :',
+        id : 'ID :',
+        users : users,
+        formCreate : 'Générer un utilisateur',
+        email : 'Email :',
+        password : 'Mot de passe :'
     })
-
 }
-

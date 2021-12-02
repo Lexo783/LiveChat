@@ -6,13 +6,14 @@ import {
     getOneMessage,
     patchMessage,
     postMessage,
-    putMessage
+    putMessage,
 } from './src/controller/MessageController.js'
 import {LiveTchatController} from "./src/controller/LiveTchatController.js";
-import {AdminController} from './src/controller/AdminController.js';
+import {AdminController, generateUser} from './src/controller/AdminController.js';
 import {loginController} from './src/controller/LoginController.js'
 import requireAuth from "./src/middleware/requireAuth.js"
 import {signIn, signOut} from "./src/controller/AuthSecurity.js"
+
 
 const router = express.Router()
 
@@ -36,6 +37,6 @@ router.delete('/message', deleteMessage)
 
 // admin route 
 router.get('/admin', AdminController)
-
+router.post('/createUser', createUser)
 
 export default router
