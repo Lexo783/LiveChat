@@ -59,6 +59,4 @@ export async function deleteUser(request, response){
         const user = await removeUser(request.body.id)
         response.status(200).send(user)
     }
-
-
 }

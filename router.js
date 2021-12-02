@@ -14,6 +14,7 @@ import {loginController} from './src/controller/LoginController.js'
 import requireAuth from "./src/middleware/requireAuth.js"
 import {signIn, signOut} from "./src/controller/AuthSecurity.js"
 import {deleteUser, getUser, getUsers, patchUser, postUser} from "./src/controller/UserController.js";
+import {getOneRoom, postRoom, patchRoom, deleteRoom} from './src/controller/RoomController.js';
 
 
 const router = express.Router()
@@ -42,11 +43,17 @@ router.delete('/message', deleteMessage)
 // admin route 
 router.get('/admin', AdminController)
 
+// user route
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
 router.post('/user', postUser)
 router.patch('/user', patchUser) // patch modifie partiellement
 router.put('/user', putMessage) // put remplace
 router.delete('/user', deleteUser)
+
+// room route
+router.get('/room/:id', getOneRoom)
+router.post('/room', postRoom)
+router.delete('/room', deleteRoom)
 
 export default router

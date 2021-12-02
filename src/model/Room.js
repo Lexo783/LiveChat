@@ -9,6 +9,6 @@ const schema = new database.Schema({
     minimize: false
 })
 
-const User = database.model('room', schema)
+const Room = database.model('room', schema)
 
-export default User
+export default Room
