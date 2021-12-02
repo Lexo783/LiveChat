@@ -6,7 +6,7 @@ export async function AdminController(request, response) {
     var users = await getAllUsers()
     var rooms = await getAllRooms()
     
-    response.render('admin/admin.html',{
+    response.render('admin/adminView.html',{
         title : 'admin',
         h1 : 'Gestion des utilisateurs',
         pseudo : 'Pseudo :',

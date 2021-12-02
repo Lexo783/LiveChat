@@ -44,8 +44,8 @@ router.delete('/message', requireAuth,deleteMessage)
 // end Messages route
 
 // admin route 
-//router.get('/admin', requireAuth,AdminController)
-router.get('/admin',AdminController)
+router.get('/admin', requireAuth,AdminController)
+//router.get('/admin',AdminController)
 
 
 // user route
