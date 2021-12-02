@@ -13,7 +13,7 @@
         </p> 
         <p> 
             <label for="password">Password : </label> 
-            <input  name="password" type="password" placeholder="Password" id="password" required/>
+            <input name="password" type="password" placeholder="Password" id="password" required/>
         </p> 
         <input type="submit" value="submit" /> 
     </form>
@@ -24,10 +24,11 @@
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
                 let data = new FormData(form);
+                console.log(data.get(password))
                 axios({
                     method: "post",
                     url: "/signIn",
-                    data: data,
+                    data: data.,
                 })
                     .then((res) => {
                         console.log(res);

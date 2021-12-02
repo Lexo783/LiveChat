@@ -23,6 +23,7 @@ router.get('/', homeController)
 
 // live Tchat : mettre un midleWare qui va verif la connexion et ci besoin va return la vue de connexion
 router.get('/live_tchat', requireAuth, LiveTchatController)
+
 router.get('/login', loginController)
 router.post('/signIn', signIn)
 router.get('/logout', signOut)

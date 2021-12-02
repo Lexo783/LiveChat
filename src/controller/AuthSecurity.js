@@ -38,7 +38,7 @@ const localLogin = new LocalStrategy(
 );
 
 function signIn(req, res, next) {
-    console.log(req.body)
+    console.log()
     passport.authenticate("local", { session: false }, (err, email, infos) => {
         if (err) {return res.status(500).json("impossible de se connecter");
         } else if (!email) {
