@@ -30,15 +30,15 @@
                     console.log(data)
                     axios({
                         method: "post",
-                        url: "/createUser",
+                        url: "/user",
                         data: data
                     })
-                        .then((res) => {
-                            console.log(res);
-                        })
-                        .catch((err) => {
-                            throw err;
-                        });
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
                 });
             });
         </script>
@@ -65,12 +65,13 @@
             <script>
                 window.addEventListener("load", () => {
                     const form = document.querySelector("#form_delete");
-                    form.addEventListener("submit", async event => {
+                    if(form != null){
+                        form.addEventListener("submit", async event => {
                         event.preventDefault();
                         const data = document.querySelector('#input_id').value;
                         axios({
-                            method: "post",
-                            url: "/deleteUser",
+                            method: "delete",
+                            url: "/user",
                             data: data
                         })
                         .then((res) => {
@@ -80,6 +81,7 @@
                             throw err;
                         });
                     });
+                    }        
                 });
             </script>
         </div>
