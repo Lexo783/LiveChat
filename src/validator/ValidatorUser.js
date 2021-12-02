@@ -3,7 +3,7 @@ import Validator from "fastest-validator";
 const valid = new Validator()
 
 const schemaPost = {
-    email: {type: "string", min:3, max: 255},
+    email: {type: "email"},
     pseudo: {type: 'string',min: 3, max: 255},
     password: {type: "string", min: 3, max: 255},
 }

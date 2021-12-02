@@ -11,7 +11,7 @@
     <div class="create-user-div">
         <h2>{{ formCreate }}</h2>
         <form id="form_create">
-            <input name="email" type="email" placeholder="email" id="email" required>
+            <input name="email" type="text" placeholder="email" id="email" required>
             <input name="pseudo" type="text" placeholder="pseudo" id="pseudo" required>
             <input name="password" type="password" placeholder="Mot de passe" id="password" required>
             <button type="submit">Générer</button>
@@ -71,7 +71,7 @@
                         const data = {
                             id: document.querySelector('#input_id').value
                         }
-                        console.log('query selector de ses morts :',data)
+                        console.log('query selector :',data)
 
                         axios({
                             method: "delete",
