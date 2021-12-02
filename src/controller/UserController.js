@@ -14,13 +14,6 @@ export async function getUser(request, response) {
     })
 }
 
-export async function getUser(request, response) {
-    console.log(request.params) // return obj
-    response.status(200).send({
-        id: request.params.id
-    })
-}
-
 export async function postUser(request, response){
     console.log('body : ',request.body)
     //check ici
