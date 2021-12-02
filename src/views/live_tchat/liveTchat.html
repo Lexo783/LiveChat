@@ -10,14 +10,44 @@
     </div>
     <div>
         <div class="ici les messages">
-
+            <ul id="messages"></ul>
         </div>
         <div class="zone d'écriture">
-            <form method="post" action="/message">
-                <input name="text" placeholder="Ecrire ici">
+            <form id="form" method="post" action="/message">
+                <input id="input" name="textv" placeholder="Ecrire ici">
                 <input type="submit" placeholder="submit">
             </form>
         </div>
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect', () => {
+            console.log('connected to server')
+        })
+
+        var messages = document.getElementById('messages');
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (input.value) {
+                data = {
+                    room: 1,
+                    message: input.value,
+                }
+                socket.emit('chat message', data);
+                input.value = '';
+            }
+        });
+        socket.on('chat message', function(msg) {
+            var item = document.createElement('li');
+            item.textContent = msg.message;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
 </body>
 </html>
