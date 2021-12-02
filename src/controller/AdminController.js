@@ -20,6 +20,7 @@ export async function AdminController(request, response) {
         formCreateRoom : 'Créer une room samerres',
         email : 'Email :',
         password : 'Mot de passe :',
-        formCreateRoom : 'Créer une room samerres'
+        formCreateRoom : 'Créer une room samerres',
+        defautRoom : 'par defaut :'
     })
 }

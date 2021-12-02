@@ -55,5 +55,6 @@ router.delete('/user', deleteUser)
 router.get('/room/:id', getOneRoom)
 router.post('/room', postRoom)
 router.delete('/room', deleteRoom)
+router.patch('/room', patchRoom)
 
 export default router

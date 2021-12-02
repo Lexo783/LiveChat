@@ -1,9 +1,9 @@
 import Room from "../../model/Room.js";
 
 
-export async function createRoom(name) {
+export async function createRoom(name, defaut) {
     return await Room.create({
-        name
+        name, defaut
     })
 }
 
@@ -18,5 +18,10 @@ export async function getOneRoom(id){
 export async function removeRoom(id){
     return await Room.deleteOne({
         ' _id': `ObjectId(${id})`
+    })
+}
+export async function patchRoom(){
+    return await Room.update({
+        
     })
 }

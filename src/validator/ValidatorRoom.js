@@ -4,6 +4,7 @@ const valid = new Validator()
 
 const schemaPost = {
     name: {type: "string", min: 3, max: 255},
+    defaut: {type: "boolean"},
 
 }
 

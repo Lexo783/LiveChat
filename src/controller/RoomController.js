@@ -23,7 +23,7 @@ export async function postRoom(request, response) {
         console.log('check raté')
         response.status(400).send({error: check})
     }else if(check == true){
-        const room = await createRoom(request.body.name)
+        const room = await createRoom(request.body.name, request.body.defaut)
         response.status(200).send(room)
     }
 }

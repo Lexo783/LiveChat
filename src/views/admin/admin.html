@@ -21,6 +21,8 @@
         <h2>{{ formCreateRoom }}</h2>
         <form id="form_create_room">
             <input name="name" type="text" placeholder="Nom de la room" id="name_room" required>
+            <label>par defaut ?</label>
+            <input id="defaut_check" name="defaut" type="checkbox" >
             <button type="submit">Créer</button>
         </form>
         <ul>
@@ -29,10 +31,13 @@
                 <li>
                     <h2>{{ nameRoom }}</h2>
                     {{ itemRoom.name }}
+                    <h3>{{ defautRoom }}</h3>
+                    {{ itemRoom.defaut }}
                     <h3>{{ idRoom }}</h3>
                     {{ itemRoom. _id }}
                     <form id="form_delete_room">
                         <input id="input_id_room" type="hidden" value="{{ itemRoom. _id }}">
+                       
                         <input type="submit" placeholder="submit" value="Supprimer">
                     </form>
                 </li>
@@ -94,8 +99,10 @@
                 const formRoom = document.querySelector("#form_create_room");
                 formRoom.addEventListener("submit", async event => {
                     event.preventDefault();
-                    const name = document.querySelector('#name_room').value;             
-                    data = {name: name}
+                    const name = document.querySelector('#name_room').value;   
+                    const defaut = (document.querySelector('#defaut_check:checked') !== null ? true : false);   
+
+                    data = {name: name, defaut: defaut}
                     console.log(data)
                     axios({
                         method: "post",
