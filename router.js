@@ -37,7 +37,7 @@ router.delete('/message', deleteMessage)
 
 // admin route 
 router.get('/admin', AdminController)
-router.post('/createUser', createUser)
+router.post('/createUser', generateUser)
 
 
 export default router
