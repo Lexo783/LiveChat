@@ -1,8 +1,5 @@
 import {getAllUsers} from "../services/user/userService.js";
-import {deleteUser} from "../services/user/userService.js";
-import { createUser } from "../services/user/userService.js";
 
-import { removeUser } from "./UserController.js";
 /*import { modifyUser } from "../services/user/userService.js";*/
 
 export async function AdminController(request, response) {

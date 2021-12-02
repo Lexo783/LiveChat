@@ -13,7 +13,7 @@ import {AdminController} from './src/controller/AdminController.js';
 import {loginController} from './src/controller/LoginController.js'
 import requireAuth from "./src/middleware/requireAuth.js"
 import {signIn, signOut} from "./src/controller/AuthSecurity.js"
-import {postUser} from "./src/controller/UserController.js";
+import {deleteUser, getUser, getUsers, patchUser, postUser} from "./src/controller/UserController.js";
 
 
 const router = express.Router()
@@ -38,6 +38,12 @@ router.delete('/message', deleteMessage)
 
 // admin route 
 router.get('/admin', AdminController)
-router.post('/createUser', postUser)
+
+router.get('/user', getUsers)
+router.get('/user/:id', getUser)
+router.post('/user', postUser)
+router.patch('/user', patchUser) // patch modifie partiellement
+router.put('/user', putMessage) // put remplace
+router.delete('/user', deleteUser)
 
 export default router

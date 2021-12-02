@@ -1,13 +1,16 @@
-import {getAllUsers} from "../services/user/userService.js";
-import {deleteUser} from "../services/user/userService.js";
-import { createUser } from "../services/user/userService.js";
+
+import { createUser, getAllUsers, removeUser, getOneUser } from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
 
+export async function getUsers(request, response) {
 
-export async function removeUser(request, response){
-    console.log(request.body.id) // return obj
-    const user = await deleteUser(request.body.id)
-    response.status(200).send(user)
+}
+
+export async function getUser(request, response) {
+    console.log(request.params) // return obj
+    response.status(200).send({
+        id: request.params.id
+    })
 }
 
 export async function postUser(request, response){
@@ -23,7 +26,18 @@ export async function postUser(request, response){
         });
     });
 }
-export async function updateUser(request, response){
+export async function patchUser(request, response){
     const user = await modifyUser(/*champs à modifier ici */)
+    response.status(200).send(user)
+}
+
+
+export async function putUser(request, response) {
+
+}
+
+export async function deleteUser(request, response){
+    console.log(request.body.id) // return obj
+    const user = await removeUser(request.body.id)
     response.status(200).send(user)
 }
