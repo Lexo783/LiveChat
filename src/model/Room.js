@@ -2,6 +2,7 @@ import database from 'mongoose'
 
 const schema = new database.Schema({
     name: {type: String},
+    defaut:{type: Boolean},
     //option: timestamps ajoute le created_at et update_at
     //option: minimize ... j'ai pas trop compris mais ça peut faire des erreurs a cause d'une clef name donc TKT GROS ON EST BON
 },{
@@ -9,6 +10,6 @@ const schema = new database.Schema({
     minimize: false
 })
 
-const User = database.model('room', schema)
+const Room = database.model('room', schema)
 
-export default User
+export default Room
