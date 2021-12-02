@@ -11,6 +11,7 @@ export async function getAllUsers(){
 }
 
 export async function getOneUser(email){
+    console.log(await User.findOne({email}))
     return await User.findOne({email})
 }
 
