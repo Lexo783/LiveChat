@@ -15,6 +15,7 @@
             <input name="pseudo" type="text" placeholder="pseudo" id="pseudo" required>
             <input name="password" type="password" placeholder="Mot de passe" id="password" required>
             <button type="submit">Générer</button>
+
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -56,6 +57,7 @@
                 {{ item. _id }}
                 <form id="form_delete">
                     <input id="input_id" type="hidden" value="{{ item. _id }}">
+
                     <input type="submit" placeholder="submit" value="Supprimer">
                 </form>
             </li>
