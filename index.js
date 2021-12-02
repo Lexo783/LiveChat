@@ -3,6 +3,9 @@ import http from 'http'
 import router from './router.js'
 import nunjucks from 'nunjucks'
 import { initMongoose } from './database/database.js'
+import passport from 'passport'
+import {jwtLogin, localLogin} from './src/controller/AuthSecurity.js'
+import { Server as SioServer} from 'socket.io'
 
 initMongoose().then(() => {
     console.log("Database connected")
@@ -14,7 +17,15 @@ initMongoose().then(() => {
 function startWebServer() {
     const app = express()
     const server = http.createServer(app)
+    const io = new SioServer(server)
 
+    io.on('connection', socket => {
+        console.log('io client', socket.id)
+    })
+
+    app.use(passport.initialize())
+    passport.use(jwtLogin);
+    passport.use(localLogin);
     nunjucks.configure('src/views', {
         autoescape: true,
         express: app
@@ -26,6 +37,7 @@ function startWebServer() {
     // services de fichiers statique
     app.use(express.static('public'))
     app.use(express.static('src/views'))
+
 
     app.use(router)
 

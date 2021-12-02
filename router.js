@@ -6,13 +6,15 @@ import {
     getOneMessage,
     patchMessage,
     postMessage,
-    putMessage
+    putMessage,
 } from './src/controller/MessageController.js'
 import {LiveTchatController} from "./src/controller/LiveTchatController.js";
-import { AdminController } from './src/controller/AdminController.js';
-import { generateUser } from './src/controller/UserController.js';
-import { removeUser } from './src/controller/UserController.js';
-import { getAllUsers } from './src/services/user/userService.js';
+import {AdminController} from './src/controller/AdminController.js';
+import {loginController} from './src/controller/LoginController.js'
+import requireAuth from "./src/middleware/requireAuth.js"
+import {signIn, signOut} from "./src/controller/AuthSecurity.js"
+import {deleteUser, getUser, getUsers, patchUser, postUser} from "./src/controller/UserController.js";
+
 
 const router = express.Router()
 
@@ -20,7 +22,11 @@ const router = express.Router()
 router.get('/', homeController)
 
 // live Tchat : mettre un midleWare qui va verif la connexion et ci besoin va return la vue de connexion
-router.get('/live_tchat',LiveTchatController)
+router.get('/live_tchat', requireAuth, LiveTchatController)
+
+router.get('/login', loginController)
+router.post('/signIn', signIn)
+router.get('/logout', signOut)
 
 // Messages route
 router.get('/message', getAllMessages)
@@ -33,11 +39,7 @@ router.delete('/message', deleteMessage)
 
 // admin route 
 router.get('/admin', AdminController)
-router.post('/createUser', generateUser)
-router.post('/deleteUser', removeUser)
-router.get('/getAllUsers', getAllUsers)
 
-// user route
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
 router.post('/user', postUser)

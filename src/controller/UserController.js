@@ -1,6 +1,3 @@
-import {getAllUsers} from "../services/user/userService.js";
-import {deleteUser} from "../services/user/userService.js";
-import { createUser } from "../services/user/userService.js";
 
 import { createUser, getAllUsers, removeUser, getOneUser } from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
@@ -17,7 +14,14 @@ export async function getUser(request, response) {
     })
 }
 
-export async function generateUser(request, response){
+export async function getUser(request, response) {
+    console.log(request.params) // return obj
+    response.status(200).send({
+        id: request.params.id
+    })
+}
+
+export async function postUser(request, response){
     console.log('body : ',request.body)
     //check ici
     const check = checkPostUser(request.body)
