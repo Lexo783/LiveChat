@@ -10,7 +10,7 @@ export async function removeUser(request, response){
     response.status(200).send(user)
 }
 
-export async function createUser(request, response){
+export async function postUser(request, response){
     console.log('body : ',request.body)
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(request.body.password, salt, async function (err, hash) {
