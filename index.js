@@ -25,6 +25,7 @@ function startWebServer() {
         socket.on('disconnect', () => {
             console.log('user disconnected');
         });
+
         socket.on('chat message', async (msg) => {
             var newMessage = await createMessage(msg.creator,msg.creatorPseudo, msg.message, msg.room)
             io.emit('chat message', newMessage);
