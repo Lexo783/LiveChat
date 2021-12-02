@@ -69,8 +69,8 @@
                         event.preventDefault();
                         const data = document.querySelector('#input_id').value;
                         axios({
-                            method: "post",
-                            url: "/deleteUser",
+                            method: "delete",
+                            url: "/user",
                             data: data
                         })
                         .then((res) => {
