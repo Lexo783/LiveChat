@@ -29,21 +29,21 @@ const localLogin = new LocalStrategy(
             } else if (!match) {
                 return done(null, false, { error: "email incorrect" });
             } else {
-                return done(null, email);
+                return done(null, user);
             }
         });
     }
 );
 
 function signIn(req, res, next) {
-    passport.authenticate("local", { session: false }, (err, email, infos) => {
+    passport.authenticate("local", { session: false }, (err, user, infos) => {
         if (err) {
             return res.status(500).json("impossible de se connecter");
         } else if (!email) {
             return res.status(500).json("impossible de se connecter");
         } else {
             const timestamp = new Date().getTime() / 1000;
-            const token = jwt.sign({ sub: email, iat: timestamp }, jwtKey, {
+            const token = jwt.sign({ sub: user, iat: timestamp }, jwtKey, {
                 expiresIn: "12h",
             });
             new Cookies(req, res, { keys: [cookieKey] }).set("jwt", token, {
@@ -51,15 +51,17 @@ function signIn(req, res, next) {
                 signed: true,
                 overwrite: true,
             });
-            res.status(200).send(email);
+            res.status(200).send(user.email);
         }
     })(req, res, next);
 }
 
 const cookieExtractor = function (req) {
     let token = null;
-    if (req && req.cookies && req.cookies.get("jwt"))
-        token = req.cookies.get("jwt");
+    const jwt = req.headers.cookie.split('jwt=').pop().split(';')[0]; // returns 'two'
+    if (req && req.headers.cookie && jwt) {
+        token = jwt;
+    }
     return token;
 };
 
