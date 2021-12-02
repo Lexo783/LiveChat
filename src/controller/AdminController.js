@@ -1,8 +1,8 @@
-import { response } from "express";
 import {getAllUsers} from "../services/user/userService.js";
 import {deleteUser} from "../services/user/userService.js";
 import { createUser } from "../services/user/userService.js";
-import axios from 'axios';
+import { removeUser } from "./UserController.js";
+/*import { modifyUser } from "../services/user/userService.js";*/
 
 export async function AdminController(request, response) {
     var users = await getAllUsers()
@@ -11,22 +11,10 @@ export async function AdminController(request, response) {
         title : 'admin',
         h1 : 'Gestion des utilisateurs',
         pseudo : 'Pseudo :',
-        id : 'ID',
+        id : 'ID :',
         users : users,
-        formCreate : 'Générer un utilisateur'
-
+        formCreate : 'Générer un utilisateur',
+        email : 'Email :',
+        password : 'Mot de passe :'
     })
-
-}
-
-export async function removeUser(request, response){
-    console.log(request.body.id) // return obj
-    const user = await deleteUser(request.body.id)
-    response.status(200).send(user)
-}
-
-export async function generateUser(request, response){
-    console.log(request.body)
-    const user = await createUser(request.body.pseudo, request.body.email)
-    response.status(200).send(user)
 }

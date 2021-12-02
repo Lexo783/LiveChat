@@ -1,15 +1,15 @@
 import User from "../../model/User.js";
 
-export async function createUser(email, pseudo) {
+export async function createUser(email, pseudo, password) {
     const user = await User.create({
-        email, pseudo
+        email, pseudo, password
     })
     return user
 }
 
 export async function getAllUsers(){
     const users = await User.find()
-    return users 
+    return users
 }
 
 export async function deleteUser(id){
@@ -18,3 +18,9 @@ export async function deleteUser(id){
     })
     return deleteUser
 }
+/*export async function modifyUser(email, pseudo, password){
+    const user = await User.update({
+        email, pseudo, password
+    })
+    return user
+}*/
