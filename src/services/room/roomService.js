@@ -11,6 +11,10 @@ export async function getAllRooms(){
     return await Room.find()
 }
 
+export async function getdefaultRoom(defaut){
+    return await Room.findOne({defaut})
+}
+
 export async function getOneRoom(id){
     return await Room.findOne({id})
 }

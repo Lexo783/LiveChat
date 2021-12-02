@@ -3,6 +3,10 @@ import { createUser, getAllUsers, removeUser, getOneUser } from "../services/use
 import bcrypt from "bcryptjs";
 import { checkPostUser, checkDeleteUser } from "../validator/ValidatorUser.js";
 
+export async function getCurrentUser(request, response){
+    response.status(200).send(request.user)
+}
+
 export async function getUsers(request, response) {
 
 }

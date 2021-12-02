@@ -3,7 +3,6 @@ import {getAllRooms} from "../services/room/roomService.js";
 /*import { modifyUser } from "../services/user/userService.js";*/
 
 export async function AdminController(request, response) {
-    console.log(request.user)
     var users = await getAllUsers()
     var rooms = await getAllRooms()
     
@@ -18,10 +17,8 @@ export async function AdminController(request, response) {
         nameRoom : 'nom :',
         idRoom : 'ID :',
         rooms: rooms,
-        formCreateRoom : 'Créer une room samerres',
         email : 'Email :',
         password : 'Mot de passe :',
-        formCreateRoom : 'Créer une room samerres',
         defautRoom : 'par defaut :'
     })
 }
