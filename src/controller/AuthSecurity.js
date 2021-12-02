@@ -43,8 +43,7 @@ function signIn(req, res, next) {
             return res.status(500).json("impossible de se connecter");
         } else {
             const timestamp = new Date().getTime() / 1000;
-            const token_infos = email;
-            const token = jwt.sign({ sub: token_infos, iat: timestamp }, jwtKey, {
+            const token = jwt.sign({ sub: email, iat: timestamp }, jwtKey, {
                 expiresIn: "12h",
             });
             new Cookies(req, res, { keys: [cookieKey] }).set("jwt", token, {
