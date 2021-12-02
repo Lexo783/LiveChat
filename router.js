@@ -37,8 +37,6 @@ router.post('/createUser', generateUser)
 router.post('/deleteUser', removeUser)
 router.get('/getAllUsers', getAllUsers)
 
-<<<<<<< Updated upstream
-=======
 // user route
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
@@ -46,6 +44,5 @@ router.post('/user', postUser)
 router.patch('/user', patchUser) // patch modifie partiellement
 router.put('/user', putMessage) // put remplace
 router.delete('/user', deleteUser)
->>>>>>> Stashed changes
 
 export default router

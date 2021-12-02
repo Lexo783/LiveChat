@@ -12,16 +12,10 @@ export async function getAllUsers(){
     return users
 }
 
-<<<<<<< Updated upstream
-export async function deleteUser(id){
-    const deleteUser = await User.deleteOne({
-        ' _id' : `ObjectId(${id})`
-=======
 export async function removeUser(id){
     console.log(id)
     return await User.deleteOne({
         ' _id': `ObjectId(${id})`
->>>>>>> Stashed changes
     })
     return deleteUser
 }
