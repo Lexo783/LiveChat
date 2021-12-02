@@ -1,42 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+<html lang="en"> 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </script>
-    <title>ChatLive</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="liveTchat.css" />
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <h1>Chat</h1>
+        <h3 class=" text-center">Messaging</h3>
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4>Rooms</h4>
+                        </div>
+                    </div>
+                    <div class="inbox_chat">
+                        <div class="chat_list active_chat">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 1<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 2<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 3<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 4<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 5<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 6<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5>Room 7<span class="chat_date">Dec 25</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="btn-group col-md-8 bg-secondary">
-                        <a href="#" class="btn active" aria-current="page">Active link</a>
-                        <a href="#" class="btn">Link</a>
-                        <a href="#" class="btn">Link</a>
+                <div class="mesgs">
+                    <div class="msg_history">
+                        <div class="incoming_msg">
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p>Hello</p>
+                                    <span class="time_date"> 11:01 AM    |    June 9</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>Hello :)</p>
+                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                            </div>
+                        </div>
+                        <div class="incoming_msg">
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p>Je t'aime pas</p>
+                                    <span class="time_date"> 11:01 AM    |    Yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>Ah!</p>
+                                <span class="time_date"> 11:01 AM    |    Today</span> 
+                            </div>
+                        </div>
+                        <div class="outgoing_msg">
+                            <div class="sent_msg">
+                                <p>Fin' frero</p>
+                                <span class="time_date"> 11:01 AM    |    Today</span>
+                            </div>
+                        </div>
+                        <div class="incoming_msg">
+                            <div class="received_msg">
+                                <div class="received_withd_msg">
+                                    <p>t'es gringe</p>
+                                    <span class="time_date"> 11:01 AM    |    Today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="type_msg">
+                        <div class="input_msg_write">
+                            <input type="text" class="write_msg" placeholder="Type a message" />
+                            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="col">
-                <div class="chat row">
-                    <p>Hello</p>
-                    <p>Hello :)</p>
-                </div>
-                <div class="message row">
-                    <form method="post" action="/message">
-                        <input type="text" placeholder="Your message">
-                        <input type="submit" placeholder="submit">
-                    </form>
-                </div>
-            </div>
         </div>
-
-    
     </div>
 </body>
 </html>
