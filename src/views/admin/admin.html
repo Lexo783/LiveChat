@@ -67,7 +67,11 @@
                     const form = document.querySelector("#form_delete");
                     form.addEventListener("submit", async event => {
                         event.preventDefault();
-                        const data = document.querySelector('#input_id').value;
+                        const data = {
+                            id: document.querySelector('#input_id').value
+                        }
+                        console.log('query selector de ses morts :',data)
+
                         axios({
                             method: "post",
                             url: "/deleteUser",
