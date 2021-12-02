@@ -1,4 +1,4 @@
-import express from 'express'
+import express, {request} from 'express'
 import http from 'http'
 import router from './router.js'
 import nunjucks from 'nunjucks'
@@ -6,6 +6,7 @@ import { initMongoose } from './database/database.js'
 import passport from 'passport'
 import {jwtLogin, localLogin} from './src/controller/AuthSecurity.js'
 import { Server as SioServer} from 'socket.io'
+import {createMessage} from "./src/services/message/messageService.js";
 
 initMongoose().then(() => {
     console.log("Database connected")
@@ -19,9 +20,18 @@ function startWebServer() {
     const server = http.createServer(app)
     const io = new SioServer(server)
 
-    io.on('connection', socket => {
-        console.log('io client', socket.id)
-    })
+    io.on('connection', (socket) => {
+        console.log('a user connected');
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        });
+        socket.on('chat message', (msg) => {
+            console.log(request.user, "DE")
+            createMessage()
+            io.emit('chat message', msg);
+        });
+    });
+
 
     app.use(passport.initialize())
     passport.use(jwtLogin);

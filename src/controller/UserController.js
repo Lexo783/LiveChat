@@ -1,6 +1,6 @@
-
 import { createUser, getAllUsers, removeUser, getOneUser } from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
+
 
 export async function getUsers(request, response) {
 
@@ -14,7 +14,7 @@ export async function getUser(request, response) {
 }
 
 export async function postUser(request, response){
-    console.log('body : ',request.body)
+    console.log('body : ',request.user)
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(request.body.password, salt, async function (err, hash) {
             if (err !== null) {

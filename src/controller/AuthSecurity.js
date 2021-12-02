@@ -19,6 +19,7 @@ const localLogin = new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
         const user = await getOneUser(email);
+        console.log(user)
         if (email !== user.email) {
             return done(null, false, { error: "email incorrect" });
         }
@@ -36,10 +37,11 @@ const localLogin = new LocalStrategy(
 );
 
 function signIn(req, res, next) {
+    console.log(req.body)
     passport.authenticate("local", { session: false }, (err, user, infos) => {
         if (err) {
             return res.status(500).json("impossible de se connecter");
-        } else if (!email) {
+        } else if (!user) {
             return res.status(500).json("impossible de se connecter");
         } else {
             const timestamp = new Date().getTime() / 1000;

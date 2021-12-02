@@ -16,13 +16,17 @@
         </div>
     </form>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     window.addEventListener("load", () => {
         const form = document.querySelector("form");
         form.addEventListener("submit", (e) => {
             e.preventDefault();
-            let data = new FormData(form);
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+            let data = {email,password}
+
             axios({
                 method: "post",
                 url: "/signIn",
