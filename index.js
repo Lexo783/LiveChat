@@ -21,17 +21,7 @@ function startWebServer() {
 
     io.on('connection', socket => {
         console.log('io client', socket.id)
-        socket.on('disconnect', () => {
-            console.log('user',socket.id, 'disconnected');
-        });
     })
-
-    io.on('connection', (socket) => {
-        socket.on('chat message', (msg) => {
-            console.log(msg)
-            io.emit('chat message', msg);
-        });
-    });
 
     app.use(passport.initialize())
     passport.use(jwtLogin);
