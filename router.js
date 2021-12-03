@@ -18,7 +18,7 @@ import {deleteUser, getCurrentUser, getUser, getUsers, patchUser, postUser} from
 import {registerController} from "./src/controller/RegisterController.js";
 import {getOneRoom, postRoom, patchRoom, deleteRoom} from './src/controller/RoomController.js';
 import maybeIsAdmin from "./src/middleware/requireIsAdmin.js";
-
+import { ProfileController } from './src/controller/ProfileController.js';
 
 const router = express.Router()
 
@@ -54,6 +54,7 @@ router.get('/admin', requireAuth,AdminController)
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
 router.post('/user', postUser)
+router.patch('/user', patchUser)
 router.delete('/user', deleteUser)
 
 // room route
@@ -61,4 +62,6 @@ router.get('/room/:id', getOneRoom)
 router.post('/room', postRoom)
 router.delete('/room', deleteRoom)
 
+// profile route
+router.get('/profile', requireAuth, ProfileController)
 export default router

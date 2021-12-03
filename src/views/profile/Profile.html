@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <div class="user-wrapper">
+        <form id="form_patch">
+            <input id="pseudo" type="text" value="{{ user.pseudo }}" required>
+            <input id="email" type="email" value="{{ user.email }}" required>
+            <input id="input_id_user" type="hidden" value="{{ user._id }}">
+            <input type="submit">
+        </form>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            window.addEventListener("load", () => {
+                const form = document.querySelector("#form_patch");
+                form.addEventListener("submit", async event => {
+                    event.preventDefault();
+                    const email = document.querySelector('#email').value;
+                    const pseudo = document.querySelector('#pseudo').value;
+                    const id = document.querySelector('#input_id_user').value;
+                    data = {id: id, email: email, pseudo: pseudo}
+                    console.log(data)
+                    axios({
+                        method: "patch",
+                        url: "/user",
+                        data: data
+                    })
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
