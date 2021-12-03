@@ -27,19 +27,19 @@
             <li>
                 <div class="userList row border-top">
                     <div class="col">
-                        <b>pseudo</b>
+                        <b>pseudo: </b>
                         {{ item.pseudo }}
                     </div>
                     <div class="col">
-                        <b>email</b>
+                        <b>email: </b>
                         {{ item.email }}
                     </div>
                     <div class="col">
-                        <b>mot de passe</b>
+                        <b>mot de passe: </b>
                         {{ item.password }}
                     </div>
                     <div class="col">
-                        <b>id</b>
+                        <b>id: </b>
                         {{ item. _id }}
                     </div>
                 </div>
@@ -55,27 +55,46 @@
     </ul>
     <!-- --->
     <div class="create-room-div">
-        <h2>{{ formCreateRoom }}</h2>
-        <form id="form_create_room">
-            <input name="name" type="text" placeholder="Nom de la room" id="name_room" required>
-            <label>par defaut ?</label>
-            <input id="defaut_check" name="defaut" type="checkbox" >
-            <button type="submit">Créer</button>
-        </form>
+        <b>formCreateRoom</b>
+        <div class="d-flex justify-content-start mx-4">
+            <form id="form_create_room">
+                <div class="form-group">
+                    <input class="form-control my-2" name="name" type="text" placeholder="Nom de la room" id="name_room" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" id="defaut_check" name="defaut" type="checkbox">
+                            par defaut ?
+                        </label>
+                    </div>
+                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </form>
+        </div>
         <ul>
             <div class="room-wrapper">
                 {% for itemRoom in rooms %}
                 <li>
-                    <h2>{{ nameRoom }}</h2>
-                    {{ itemRoom.name }}
-                    <h3>{{ defautRoom }}</h3>
-                    {{ itemRoom.defaut }}
-                    <h3>{{ idRoom }}</h3>
-                    {{ itemRoom. _id }}
+                    <div class="userList row border-top">
+                        <div class="col">
+                            <b>nameRoom: </b>
+                            {{ itemRoom.name }}
+                        </div>
+                        <div class="col">
+                            <b>defautRoom: </b>
+                            {{ itemRoom.defaut }}                        
+                        </div>
+                        <div class="col">
+                            <b>idRoom: </b>
+                            {{ itemRoom. _id }}
+                        </div>
+                    </div>
                     <form id="form_delete_room">
                         <input id="input_id_room" type="hidden" value="{{ itemRoom. _id }}">
-
-                        <input type="submit" placeholder="submit" value="Supprimer">
+                        <input class="delete_button btn btn-danger" type="submit" placeholder="submit" value="Delete">
                     </form>
                 </li>
                 {% else %}
