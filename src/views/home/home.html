@@ -20,7 +20,10 @@
 
     <input type="button" class="btn btn-secondary btn-lg" value="Log In" style="margin-right: 2rem;" id="logIn" />
 
-    <input type="button" class="btn btn-secondary btn-lg" value="Register" id="Register" />
+    <input type="button" class="btn btn-secondary btn-lg" value="Register" style="margin-right: 2rem;" id="Register" />
+
+    <input type="button" class="btn btn-secondary btn-lg" value="Le tchatos de déglingos" id="live_tchat" />
+
 
 </div>
 <script src="/socket.io/socket.io.js"></script>
@@ -38,6 +41,11 @@
     const buttonRegister = document.getElementById('Register');
     buttonRegister.addEventListener('click', function (e) {
         window.location = '/register';
+    });
+
+    const buttonLive = document.getElementById('live_tchat');
+    buttonLive.addEventListener('click', function (e) {
+        window.location = '/live_tchat';
     });
 </script>
 </div>

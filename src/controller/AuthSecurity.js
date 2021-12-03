@@ -19,12 +19,10 @@ const localLogin = new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
         const user = await getOneUser(email);
-        console.log(user)
         if (email !== user.email) {
             return done(null, false, { error: "email incorrect" });
         }
         await bcrypt.compare(password, user.password, (err, match) => {
-            console.log(password, user.password)
             if (err) {
                 return done(null, false, { error: "email incorrect" });
             } else if (!match) {
@@ -37,7 +35,6 @@ const localLogin = new LocalStrategy(
 );
 
 function signIn(req, res, next) {
-    console.log(req.body)
     passport.authenticate("local", { session: false }, (err, user, infos) => {
         if (err) {
             return res.status(500).json("impossible de se connecter");

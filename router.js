@@ -30,7 +30,7 @@ router.get('/live_tchat', requireAuth, LiveTchatController)
 router.get('/register', registerController)
 router.get('/login', loginController)
 router.post('/signIn', signIn)
-router.get('/logout', signOut)
+router.get('/logout', requireAuth,signOut)
 router.get('/currentUserId', requireAuth, getCurrentUser)
 
 // Messages route
