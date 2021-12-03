@@ -1,17 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title_text }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block body %}
+<div class="d-flex justify-content-center">
     <h1>{{ title }}</h1>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-        socket.on('connect', () => {
-            console.log('connected to server')
-        })
-    </script>
-</body>
-</html>
+</div>
+<div class="d-flex justify-content-center">
+    <h2>Viens chatter avec des GENS !</h2>
+</div>
+<div class="d-flex justify-content-center"></div>
+<div class="container">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+</div>
+<div class="d-flex justify-content-center">
+
+    <input type="button" class="btn btn-secondary btn-lg" value="Log In" style="margin-right: 2rem;" id="logIn" />
+
+    <input type="button" class="btn btn-secondary btn-lg" value="Register" style="margin-right: 2rem;" id="Register" />
+
+    <input type="button" class="btn btn-secondary btn-lg" value="Le tchatos de déglingos" id="live_tchat" />
+
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on('connect', () => {
+        console.log('connected to server')
+    })
+
+    const buttonLogIn = document.getElementById('logIn');
+    buttonLogIn.addEventListener('click', function (e) {
+        window.location = '/login';
+    });
+
+    const buttonRegister = document.getElementById('Register');
+    buttonRegister.addEventListener('click', function (e) {
+        window.location = '/register';
+    });
+
+    const buttonLive = document.getElementById('live_tchat');
+    buttonLive.addEventListener('click', function (e) {
+        window.location = '/live_tchat';
+    });
+</script>
+</div>
+{% endblock %}

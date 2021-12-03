@@ -1,9 +1,13 @@
 import Message from "../../model/Message.js";
 
-export async function createMessage(creator = 0, text = "", room = 0) {
+export async function createMessage(creator = 0,creatorPseudo = "", text = "", room = '') {
     return await Message.create({
-        creator, text, room
+        creator, creatorPseudo, text, room
     })
+}
+
+export async function AllMessageByRoom(room) {
+    return await Message.find({room})
 }
 
 export async function getAllMessage(){

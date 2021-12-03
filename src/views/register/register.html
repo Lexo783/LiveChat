@@ -1,47 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title_text }}</title>
-</head>
-<body>
-    <h1>{{ title }}</h1>
-    <form>
-        <p>
-            <label for="email">Email : </label>
-            <input name="email" type="email" placeholder="Email" id="email" required/>
-        </p>
-        <p>
-            <label for="Username">Username : </label>
-            <input name="userName" type="text" placeholder="Username" id="Username" required/>
-        </p>
-        <p>
-            <label for="password">Password : </label>
-            <input name="password" type="password" placeholder="Password" id="password" required/>
-        </p>
-        <input type="submit" value="submit" />
-    </form>
+{% extends 'base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        window.addEventListener("load", () => {
-            const form = document.querySelector("form");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                let data = new FormData(form);
-                axios({
-                    method: "post",
-                    url: "/signIn",
-                    data: data,
+{% block body %}
+<div class="d-flex justify-content-center">
+    <form class="px-4 py-3">
+        <div class="col text-center">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="email" type="email" placeholder="Email" id="email" required />
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="userName" type="text" placeholder="Username" id="pseudo" required />
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" type="password" placeholder="Password" id="password" required />
+        </div>
+        <div class="col text-center">
+            <input type="submit" class="btn btn-secondary" value="submit" />
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    window.addEventListener("load", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#email').value;
+            const pseudo = document.querySelector('#pseudo').value;
+            const password = document.querySelector('#password').value;
+            let data = {email,pseudo,password}
+            axios({
+                method: "post",
+                url: "/user",
+                data: data,
+            })
+                .then((res) => {
+                    window.location.href = "/login";
                 })
-                    .then((res) => {
-                        console.log(res);
-                    })
-                    .catch((err) => {
-                        throw err;
-                    });
-            });
+                .catch((err) => {
+                    throw err;
+                });
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+{% endblock %}

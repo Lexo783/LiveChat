@@ -1,44 +1,38 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <title>{{ title_text }}</title> 
-</head> 
-<body> 
-    <h1>{{ title }}</h1> 
-    <form>
-        <p> 
-            <label for="email">Email : </label>
-            <input  name="email" type="email" placeholder="email" id="email" required/>
-        </p> 
-        <p> 
-            <label for="password">Password : </label> 
-            <input name="password" type="password" placeholder="Password" id="password" required/>
-        </p> 
-        <input type="submit" value="submit" /> 
+{% extends 'base.html' %}
+{% block body %}
+<div class="d-flex justify-content-center">
+    <form class="px-4 py-3">
+        <div class="col text-center">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="email" type="email" placeholder="Email" id="email" required />
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" type="password" placeholder="Password" id="password" required />
+        </div>
+        <div class="col text-center">
+            <input type="submit" class="btn btn-secondary" value="Submit" />
+        </div>
     </form>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        window.addEventListener("load", () => {
-            const form = document.querySelector("form");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const email = document.querySelector('#email').value;
-                const password = document.querySelector('#password').value;
-                data = {email: email, password: password}
-                axios({
-                    method: "post",
-                    url: "/signIn",
-                    data: data,
-                })
-                    .then((res) => {
-                        console.log(res);
-                    })
-                    .catch((err) => {
-                        throw err;
-                    });
-            });
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    window.addEventListener("load", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+            let data = {email,password}
+
+            axios({
+                method: "post",
+                url: "/signIn",
+                data: data,
+            })
         });
-    </script>
-</body> 
-</html>
+    });
+</script>
+{% endblock %}

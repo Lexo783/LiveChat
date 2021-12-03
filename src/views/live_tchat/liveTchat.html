@@ -1,159 +1,154 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="liveTchat.css" />
-</head>
-<body>
-    <div class="container">
-        <h3 class=" text-center">Messaging</h3>
-        <div class="messaging">
-            <div class="inbox_msg">
-                <div class="inbox_people">
-                    <div class="headind_srch">
-                        <div class="recent_heading">
-                            <h4>Rooms</h4>
-                        </div>
-                    </div>
-                    <div class="inbox_chat">
-                        <div class="chat_list active_chat">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 1<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 2<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 3<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 4<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 5<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 6<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_ib">
-                                    <a href="#">Room 7<span class="chat_date">Dec 25</span></a>
-                                </div>
-                            </div>
-                        </div>
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>Rooms</h4>
                     </div>
                 </div>
-                <div class="mesgs">
-                    <div class="msg_history">
-                        <div class="incoming_msg">
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>Hello</p>
-                                    <span class="time_date"> 11:01 AM    |    June 9</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>Hello :)</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
-                        <div class="incoming_msg">
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>Je t'aime pas</p>
-                                    <span class="time_date"> 11:01 AM    |    Yesterday</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>Ah!</p>
-                                <span class="time_date"> 11:01 AM    |    Today</span> 
-                            </div>
-                        </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>Fin' frero</p>
-                                <span class="time_date"> 11:01 AM    |    Today</span>
-                            </div>
-                        </div>
-                        <div class="incoming_msg">
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>t'es gringe</p>
-                                    <span class="time_date"> 11:01 AM    |    Today</span>
-                                </div>
+                <div class="inbox_chat">
+                    {% for room in rooms %}
+                    <div onclick="changingRoom('{{room.name}}')" class="chat_list active_chat">
+                        <div class="chat_people">
+                            <div class="chat_ib">
+                                <p>Room : {{room.name}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="type_msg">
-                        <div class="input_msg_write">
-                            <input type="text" class="write_msg" placeholder="Type a message" />
+                    {% else %}
+                    <li>fréro y a pas de room</li>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mesgs">
+                <div id="msg_history" class="msg_history">
+
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <form id="form">
+                            <input id="input" type="text" class="write_msg" placeholder="Type a message" />
                             <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let user = getCurrentUsers()
+    let currentRoom
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-        socket.on('connect', () => {
-            console.log('connected to server')
-        })
+    getMessageByRoomOnClick(null)
 
-        var messages = document.getElementById('messages');
-        var form = document.getElementById('form');
-        var input = document.getElementById('input');
+    function getCurrentUsers(){
+        axios({
+            method: "get",
+            url: "/currentUserId",
+        }).then((res) => {
+            user = res.data
+        }).catch((err) => {
+            throw err;
+        });
+    }
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (input.value) {
-                data = {
-                    room: 1,
-                    message: input.value,
-                }
-                socket.emit('chat message', data);
-                input.value = '';
+    function changingRoom(roomName = null){
+        getMessageByRoomOnClick(roomName)
+    }
+
+    function getMessageByRoomOnClick(roomName = null){
+        currentRoom = roomName
+        axios({
+            method: "post",
+            url: "/messagesRoom",
+            data: {roomName: roomName}
+        }).then((responseGet) => {
+            currentRoom = responseGet.data.currentRoom
+            showMessages(responseGet.data.messages)
+        }).catch((err) => {
+            throw err;
+        });
+    }
+
+    function showMessages(messages) {
+        var divMessage = document.getElementById('msg_history');
+        divMessage.innerHTML = ''
+        messages.forEach(data => {
+            var div = document.createElement('div');
+            div.setAttribute('class', 'post block bc2');
+            date = new Date(data.createdAt)
+            if(data.creatorPseudo === user.pseudo){
+                div.innerHTML = `
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <div class="received_withd_msg">
+                                        <span class="time_date">${data.creatorPseudo}</span>
+                                        <p>${data.text}</p>
+                                        <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                                    </div>
+                                 </div>
+                            </div>`;
             }
-        });
-        socket.on('chat message', function(msg) {
-            var item = document.createElement('li');
-            item.textContent = msg.message;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-    </script>
-</body>
-</html>
+            else {
+                div.innerHTML = `
+                            <div class="incoming_msg">
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <span class="time_date">${data.creatorPseudo}</span>
+                                        <p>${data.text}</p>
+                                        <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                                    </div>
+                                 </div>
+                            </div>`;
+            }
+            divMessage.appendChild(div);
+        })
+    }
+
+    const socket = io();
+    socket.on('connect', function(data) {
+    })
+
+    var messages = document.getElementById('msg_history');
+    var form = document.getElementById('form');
+    var input = document.getElementById('input');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+            data = {
+                room: currentRoom,
+                message: input.value,
+                creator: user._id,
+                creatorPseudo: user.pseudo
+            }
+            socket.emit('chat message', data);
+            input.value = '';
+        }
+    });
+    socket.on('chat message', function(data) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'post block bc2');
+        date = new Date(data.createdAt)
+        div.innerHTML = `
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <div class="received_withd_msg">
+                            <span class="time_date">${data.creatorPseudo}</span>
+                            <p>${data.text}</p>
+                            <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                        </div>
+                     </div>
+                </div>`;
+        messages.appendChild(div);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+{% endblock %}
