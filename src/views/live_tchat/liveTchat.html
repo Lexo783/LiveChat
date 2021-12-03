@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     {% else %}
-                    <li>fréro y a pas de room</li>
+                    <span>uretre y a pas de room</span>
                     {% endfor %}
                 </div>
             </div>
@@ -47,7 +47,7 @@
     let user = getCurrentUsers()
     let currentRoom
 
-    getMessageByRoomOnClick()
+    getMessageByRoomOnClick(null)
 
     function getCurrentUsers(){
         axios({

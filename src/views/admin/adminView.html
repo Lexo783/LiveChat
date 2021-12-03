@@ -2,108 +2,206 @@
 {% include "header.html" %}
 {% block body %}
 <div class="container">
-        <h1>{{ h1 }}</h1>
-        <div class="create-user-div">
-            <b>{{ formCreate }}</b>
-            <div class="d-flex justify-content-start mx-4">
-                <form id="form_create">
-                    <div class="form-group">
-                        <input class="form-control my-2" name="email" type="email" placeholder="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control my-2" name="pseudo" type="text" placeholder="pseudo" id="pseudo" required>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control my-2" name="password" type="password" placeholder="Mot de passe" id="password" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Create</button>    
-                    </div>
-                </form>
-            </div>
+    <h1>Admin</h1>
+    <div class="create-user-div">
+        <b>Création d'un utilisateur</b>
+        <div class="d-flex justify-content-start mx-4">
+            <form id="form_create">
+                <div class="form-group">
+                    <input class="form-control my-2" name="email" type="email" placeholder="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control my-2" name="pseudo" type="text" placeholder="pseudo" id="pseudo" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control my-2" name="password" type="password" placeholder="Mot de passe" id="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </form>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            <script>
-                window.addEventListener("load", () => {
-                    const form = document.querySelector("#form_create");
-                    form.addEventListener("submit", async event => {
-                        event.preventDefault();
-                        const email = document.querySelector('#email').value;
-                        const pseudo = document.querySelector('#pseudo').value;
-                        const password = document.querySelector('#password').value;
-                        data = {email: email, pseudo: pseudo, password: password}
-                        console.log(data)
-                        axios({
-                            method: "post",
-                            url: "/user",
-                            data: data
-                        })
-                        .then((res) => {
-                            console.log(res);
-                        })
-                        .catch((err) => {
-                            throw err;
-                        });
-                    });
-                });
-            </script>
+    </div>
+    <ul>
+        <div class="user-wrapper">
+            {% for item in users %}
+            <li>
+                <div class="userList row border-top">
+                    <div class="col">
+                        <b>pseudo: </b>
+                        {{ item.pseudo }}
+                    </div>
+                    <div class="col">
+                        <b>email: </b>
+                        {{ item.email }}
+                    </div>
+                    <div class="col">
+                        <b>mot de passe: </b>
+                        {{ item.password }}
+                    </div>
+                    <div class="col">
+                        <b>id: </b>
+                        {{ item. _id }}
+                    </div>
+                </div>
+                <form id="form_delete">
+                    <input id="input_id" type="hidden" value="{{ item. _id }}">
+                    <input class="delete_button btn btn-danger" type="submit" placeholder="submit" value="Delete">
+                </form>
+            </li>
+            {% else %}
+            <li>Aucun utilisateur à afficher</li>
+            {% endfor %}
+        </div>
+    </ul>
+    <!-- --->
+    <div class="create-room-div">
+        <b>formCreateRoom</b>
+        <div class="d-flex justify-content-start mx-4">
+            <form id="form_create_room">
+                <div class="form-group">
+                    <input class="form-control my-2" name="name" type="text" placeholder="Nom de la room" id="name_room" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" id="defaut_check" name="defaut" type="checkbox">
+                            par defaut ?
+                        </label>
+                    </div>
+                    </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </form>
+        </div>
         <ul>
-            <div class="user-wrapper">
-                    {% for item in users %}
+            <div class="room-wrapper">
+                {% for itemRoom in rooms %}
                 <li>
                     <div class="userList row border-top">
                         <div class="col">
-                            <b>{{ pseudo }}</b>
-                            {{ item.pseudo }}
+                            <b>nameRoom: </b>
+                            {{ itemRoom.name }}
                         </div>
                         <div class="col">
-                            <b>{{ email }}</b>
-                            {{ item.email }}
+                            <b>defautRoom: </b>
+                            {{ itemRoom.defaut }}                        
                         </div>
                         <div class="col">
-                            <b>{{ password }}</b>
-                            {{ item.password }}
+                            <b>idRoom: </b>
+                            {{ itemRoom. _id }}
                         </div>
-                        <div class="col">
-                            <b>{{ id }}</b>
-                            {{ item. _id }}
-                        </div>
-                        </div>
-                    <form id="form_delete">
-                        <input id="input_id" type="hidden" value="{{ item. _id }}">
+                    </div>
+                    <form id="form_delete_room">
+                        <input id="input_id_room" type="hidden" value="{{ itemRoom. _id }}">
                         <input class="delete_button btn btn-danger" type="submit" placeholder="submit" value="Delete">
                     </form>
                 </li>
                 {% else %}
-                <li>Aucun utilisateur à afficher</li>
-                {% endfor %}   
-                <script>
-                    window.addEventListener("load", () => {
-                        const form = document.querySelector("#form_delete");
-                        if(form != null){
-                            form.addEventListener("submit", async event => {
-                            event.preventDefault();
-                            const id = document.querySelector('#input_id').value;
-                            const data = {
-                                id
-                            }
-                            axios({
-                                method: "delete",
-                                url: "/user",
-                                data: data
-                            })
-                            .then((res) => {
-                                console.log(res);
-                            })
-                            .catch((err) => {
-                                throw err;
-                            });
-                        });
-                        }
-                    });
-                </script>
+                <li>Aucune room à afficher</li>
+                {% endfor %}
             </div>
         </ul>
     </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    window.addEventListener("load", () => {
+        const form = document.querySelector("#form_create");
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+            const email = document.querySelector('#email').value;
+            const pseudo = document.querySelector('#pseudo').value;
+            const password = document.querySelector('#password').value;
+            data = {email: email, pseudo: pseudo, password: password}
+            console.log(data)
+            axios({
+                method: "post",
+                url: "/user",
+                data: data
+            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    throw err;
+                });
+        });
+    });
+</script>
+<script>
+    window.addEventListener("load", () => {
+        const form = document.querySelector("#form_delete");
+        if(form != null){
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+                const id = document.querySelector('#input_id').value;
+                const data = {
+                    id
+                }
+                axios({
+                    method: "delete",
+                    url: "/user",
+                    data: data
+                })
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
+            });
+        }
+    });
+</script>
+<script>
+    window.addEventListener("load", () => {
+        const formRoom = document.querySelector("#form_create_room");
+        formRoom.addEventListener("submit", async event => {
+            event.preventDefault();
+            const name = document.querySelector('#name_room').value;
+            const defaut = (document.querySelector('#defaut_check:checked') !== null ? true : false);
+
+            data = {name: name, defaut: defaut}
+            console.log(data)
+            axios({
+                method: "post",
+                url: "/room",
+                data: data
+            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    throw err;
+                });
+        });
+    });
+</script>
+<script>
+    window.addEventListener("load", () => {
+        const form = document.querySelector("#form_delete_room");
+        if(form != null){
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+                const data = {
+                    id: document.querySelector('#input_id_room').value
+                }
+
+                axios({
+                    method: "delete",
+                    url: "/room",
+                    data: data
+                })
+                    .then((res) => {
+                        console.log(res);
+                    })
+                    .catch((err) => {
+                        throw err;
+                    });
+            });
+        }
+    });
+</script>
 {% endblock %}

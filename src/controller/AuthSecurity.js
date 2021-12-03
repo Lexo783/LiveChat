@@ -15,6 +15,10 @@ const JwtStrategy = passportJwt.Strategy;
 const ExtractJwt = passportJwt.ExtractJwt;
 
 const LocalStrategy = passportLocal.Strategy;
+/**
+ * vérif email
+ * @type {Strategy}
+ */
 const localLogin = new LocalStrategy(
     { usernameField: "email" },
     async (email, password, done) => {
@@ -34,6 +38,12 @@ const localLogin = new LocalStrategy(
     }
 );
 
+/**
+ * call verif email function and password and create cookie
+ * @param req
+ * @param res
+ * @param next
+ */
 function signIn(req, res, next) {
     passport.authenticate("local", { session: false }, (err, user, infos) => {
         if (err) {
@@ -55,6 +65,11 @@ function signIn(req, res, next) {
     })(req, res, next);
 }
 
+/**
+ * take token on the cookie
+ * @param req
+ * @returns {null}
+ */
 const cookieExtractor = function (req) {
     let token = null;
     const jwt = req.headers.cookie.split('jwt=').pop().split(';')[0]; // returns 'two'
@@ -63,7 +78,9 @@ const cookieExtractor = function (req) {
     }
     return token;
 };
-
+/**
+ * @type {{jwtFromRequest: ((function(*): *)|*), secretOrKey: string}}
+ */
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromExtractors([
         cookieExtractor,
@@ -72,6 +89,9 @@ const jwtOptions = {
     secretOrKey: jwtKey,
 };
 
+/**
+ * @type {JwtStrategy}
+ */
 const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     if (payload.sub) done(null, payload.sub);
     else {
@@ -79,6 +99,11 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     }
 });
 
+/**
+ * logout user
+ * @param req
+ * @param res
+ */
 const signOut = (req, res) => {
     new Cookies(req, res, { keys: [cookieKey] }).set("jwt");
 

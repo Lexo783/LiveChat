@@ -8,13 +8,24 @@ import { checkPostRoom, checkDeleteRoom } from "../validator/ValidatorRoom.js";
 
 }*/
 
+/**
+ * controller get one room
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function getOneRoom(request, response) {
     response.status(200).send({
         id: request.params.id
     })
 }
 
-
+/**
+ * create room controller
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function postRoom(request, response) {
     const check = checkPostRoom(request.body)
     if(check !== true){
