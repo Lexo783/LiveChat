@@ -63,5 +63,5 @@ router.delete('/room', deleteRoom)
 
 // profile route
 
-router.get('/profile:id', ProfileController)
+router.get('/profile', requireAuth, ProfileController)
 export default router

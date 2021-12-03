@@ -2,15 +2,14 @@
 import { getOneUser } from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
 import { checkPostUser, checkDeleteUser } from "../validator/ValidatorUser.js";
+import { getCurrentUser } from "./UserController.js";
 
 
 export async function ProfileController(request, response) {
-    var user = await getOneUser()
-    console.log('user : ',user)
+    
+    console.log('user : ',request.user)
     response.render('profile/profile.html',{
-        pseudo: user.pseudo,
-        email: user.email,
-        id: user.id
+        user: request.user
     })
 }
 

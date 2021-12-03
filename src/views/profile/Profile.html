@@ -9,9 +9,9 @@
 <body>
     <div class="user-wrapper">
         <form id="form_patch">
-            <input id="pseudo" type="text" value="{{ pseudo }}" required>
-            <input id="email" type="email" value="{{ email }}" required>
-            <input id="input_id_user" type="hidden" value="{{ id }}">
+            <input id="pseudo" type="text" value="{{ user.pseudo }}" required>
+            <input id="email" type="email" value="{{ user.email }}" required>
+            <input id="input_id_user" type="hidden" value="{{ user._id }}">
             <input type="submit">
         </form>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
