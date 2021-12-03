@@ -20,9 +20,3 @@ export async function removeUser(id){
         ' _id': `ObjectId(${id})`
     })
 }
-/*export async function modifyUser(email, pseudo, password){
-    const user = await User.update({
-        email, pseudo, password
-    })
-    return user
-}*/
