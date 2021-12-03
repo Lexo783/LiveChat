@@ -1,5 +1,9 @@
 import database from 'mongoose'
 
+/**
+ * create schéma for user
+ * @type {module:mongoose.Schema<any, Model<any, any, any, any>, any>}
+ */
 const schema = new database.Schema({
     email: {type: String},
     pseudo: {type: String},

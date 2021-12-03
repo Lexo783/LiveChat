@@ -39,12 +39,24 @@ export async function getAllMessagesByRoom(request, response) {
 
 }
 
+/**
+ * controller return on message
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function getOneMessage(request, response) {
     response.status(200).send({
         id: request.params.id
     })
 }
 
+/**
+ * controller create message
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function postMessage(request, response) {
     const check = checkPostMessage(request.body)
     if(check !== true){
