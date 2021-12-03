@@ -52,14 +52,11 @@ router.get('/admin', requireAuth,AdminController)
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
 router.post('/user', postUser)
-router.patch('/user', patchUser) // patch modifie partiellement
-router.put('/user', putMessage) // put remplace
 router.delete('/user', deleteUser)
 
 // room route
 router.get('/room/:id', getOneRoom)
 router.post('/room', postRoom)
 router.delete('/room', deleteRoom)
-router.patch('/room', patchRoom)
 
 export default router
