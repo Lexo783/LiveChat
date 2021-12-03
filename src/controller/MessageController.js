@@ -1,14 +1,27 @@
 /**
  * les services vont récupérer les données en BDD
  */
-import {AllMessageByRoom, createMessage} from "../services/message/messageService.js";
+import {AllMessageByRoom, createMessage, getAllMessage} from "../services/message/messageService.js";
 import {checkPostMessage} from "../validator/ValidatorMessage.js";
 import {getdefaultRoom} from "../services/room/roomService.js";
 
+/**
+ * controller get all message
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function getAllMessages(request, response) {
-
+    const messages =  await getAllMessage()
+    response.status(200).send(messages)
 }
 
+/**
+ * controler get all messages by the room
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
 export async function getAllMessagesByRoom(request, response) {
     let roomName
     if(request.body.roomName === null){

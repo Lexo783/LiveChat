@@ -2,7 +2,8 @@ import express from 'express'
 import { homeController } from './src/controller/HomeController.js'
 import {
     deleteMessage,
-    getAllMessages, getAllMessagesByRoom,
+    getAllMessagesByRoom,
+    getAllMessages,
     getOneMessage,
     patchMessage,
     postMessage,
