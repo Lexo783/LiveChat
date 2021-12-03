@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block body %}
 <div class="d-flex justify-content-center">
     <form class="px-4 py-3">
@@ -9,6 +10,9 @@
             <input class="form-control" name="email" type="email" placeholder="Email" id="email" required />
         </div>
         <div class="form-group">
+            <input class="form-control" name="userName" type="text" placeholder="Username" id="pseudo" required />
+        </div>
+        <div class="form-group">
             <input class="form-control" name="password" type="password" placeholder="Password" id="password" required />
         </div>
         <div class="col text-center">
@@ -16,7 +20,6 @@
         </div>
     </form>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     window.addEventListener("load", () => {
@@ -24,14 +27,20 @@
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const email = document.querySelector('#email').value;
+            const pseudo = document.querySelector('#pseudo').value;
             const password = document.querySelector('#password').value;
-            let data = {email,password}
-
+            let data = {email,pseudo,password}
             axios({
                 method: "post",
-                url: "/signIn",
+                url: "/user",
                 data: data,
             })
+                .then((res) => {
+                    window.location.href = "/login";
+                })
+                .catch((err) => {
+                    throw err;
+                });
         });
     });
 </script>

@@ -1,14 +1,12 @@
-import database from "mongoose"
+import database from 'mongoose'
 
 /**
- * create schéma for message
+ * créate schéma for room
  * @type {module:mongoose.Schema<any, Model<any, any, any, any>, any>}
  */
 const schema = new database.Schema({
-    creator: {type: String},
-    creatorPseudo: {type: String},
-    text: {type: String},
-    room: {type: String},
+    name: {type: String},
+    defaut:{type: Boolean},
     //option: timestamps ajoute le created_at et update_at
     //option: minimize ... j'ai pas trop compris mais ça peut faire des erreurs a cause d'une clef name donc TKT GROS ON EST BON
 },{
@@ -16,6 +14,6 @@ const schema = new database.Schema({
     minimize: false
 })
 
-const Message = database.model('message', schema)
+const Room = database.model('room', schema)
 
-export default Message
+export default Room

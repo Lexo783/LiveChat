@@ -1,23 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tchatos Machine</title>
-</head>
-<body>
-    <div>
-        <h1>Tchatos de déglingos</h1>
-    </div>
-    <div>
-        <div class="ici les messages">
+{% extends "base.html" %}
+{% block body %}
+{% include "header.html" %}
+<div class="container">
+    <h3 class=" text-center">Messaging</h3>
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="recent_heading">
+                        <h4>Rooms</h4>
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    {% for room in rooms %}
+                    <div onclick="changingRoom('{{room.name}}')" class="chat_list active_chat">
+                        <div class="chat_people">
+                            <div class="chat_ib">
+                                <p>Room : {{room.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <span>uretre y a pas de room</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="mesgs">
+                <div id="msg_history" class="msg_history">
 
-        </div>
-        <div class="zone d'écriture">
-            <form method="post" action="/message">
-                <input name="text" placeholder="Ecrire ici">
-                <input type="submit" placeholder="submit">
-            </form>
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <form id="form">
+                            <input id="input" type="text" class="write_msg" placeholder="Type a message" />
+                            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let user = getCurrentUsers()
+    let currentRoom
+
+    getMessageByRoomOnClick(null)
+
+    function getCurrentUsers(){
+        axios({
+            method: "get",
+            url: "/currentUserId",
+        }).then((res) => {
+            user = res.data
+        }).catch((err) => {
+            throw err;
+        });
+    }
+
+    function changingRoom(roomName = null){
+        getMessageByRoomOnClick(roomName)
+    }
+
+    function getMessageByRoomOnClick(roomName = null){
+        currentRoom = roomName
+        axios({
+            method: "post",
+            url: "/messagesRoom",
+            data: {roomName: roomName}
+        }).then((responseGet) => {
+            currentRoom = responseGet.data.currentRoom
+            showMessages(responseGet.data.messages)
+        }).catch((err) => {
+            throw err;
+        });
+    }
+
+    function showMessages(messages) {
+        var divMessage = document.getElementById('msg_history');
+        divMessage.innerHTML = ''
+        messages.forEach(data => {
+            var div = document.createElement('div');
+            div.setAttribute('class', 'post block bc2');
+            date = new Date(data.createdAt)
+            if(data.creatorPseudo === user.pseudo){
+                div.innerHTML = `
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <div class="received_withd_msg">
+                                        <span class="time_date">${data.creatorPseudo}</span>
+                                        <p>${data.text}</p>
+                                        <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                                    </div>
+                                 </div>
+                            </div>`;
+            }
+            else {
+                div.innerHTML = `
+                            <div class="incoming_msg">
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <span class="time_date">${data.creatorPseudo}</span>
+                                        <p>${data.text}</p>
+                                        <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                                    </div>
+                                 </div>
+                            </div>`;
+            }
+            divMessage.appendChild(div);
+        })
+    }
+
+    const socket = io();
+    socket.on('connect', function(data) {
+    })
+
+    var messages = document.getElementById('msg_history');
+    var form = document.getElementById('form');
+    var input = document.getElementById('input');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+            data = {
+                room: currentRoom,
+                message: input.value,
+                creator: user._id,
+                creatorPseudo: user.pseudo
+            }
+            socket.emit('chat message', data);
+            input.value = '';
+        }
+    });
+    socket.on('chat message', function(data) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'post block bc2');
+        date = new Date(data.createdAt)
+        div.innerHTML = `
+                <div class="outgoing_msg">
+                    <div class="sent_msg">
+                        <div class="received_withd_msg">
+                            <span class="time_date">${data.creatorPseudo}</span>
+                            <p>${data.text}</p>
+                            <span class="time_date"> ${date.getHours() + ':' + date.getMinutes() + ' | ' + date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()}</span>
+                        </div>
+                     </div>
+                </div>`;
+        messages.appendChild(div);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+{% endblock %}
