@@ -15,7 +15,7 @@ import requireAuth from "./src/middleware/requireAuth.js"
 import {signIn, signOut} from "./src/controller/AuthSecurity.js"
 import {deleteUser, getUser, getUsers, patchUser, postUser} from "./src/controller/UserController.js";
 import {getOneRoom, postRoom, patchRoom, deleteRoom} from './src/controller/RoomController.js';
-
+import { ProfileController } from './src/controller/ProfileController.js';
 
 const router = express.Router()
 
@@ -47,6 +47,7 @@ router.get('/admin', AdminController)
 router.get('/user', getUsers)
 router.get('/user/:id', getUser)
 router.post('/user', postUser)
+router.patch('/user', patchUser)
 router.delete('/user', deleteUser)
 
 // room route
@@ -54,4 +55,7 @@ router.get('/room/:id', getOneRoom)
 router.post('/room', postRoom)
 router.delete('/room', deleteRoom)
 
+// profile route
+
+router.get('/profile:id', ProfileController)
 export default router

@@ -1,7 +1,7 @@
 
-import { createUser, getAllUsers, removeUser, getOneUser } from "../services/user/userService.js";
+import { createUser, getAllUsers, removeUser, getOneUser, modifyUser } from "../services/user/userService.js";
 import bcrypt from "bcryptjs";
-import { checkPostUser, checkDeleteUser } from "../validator/ValidatorUser.js";
+import { checkPostUser, checkDeleteUser, checkPatchUser } from "../validator/ValidatorUser.js";
 
 export async function getUsers(request, response) {
 
@@ -37,8 +37,18 @@ export async function postUser(request, response){
 
 }
 export async function patchUser(request, response){
-    const user = await modifyUser(/*champs à modifier ici */)
-    response.status(200).send(user)
+    console.log('body', request.body)
+
+    const check = checkPatchUser(request.body)
+    console.log(check)
+    if(check !== true){
+        console.log('check raté ')
+        response.status(400).send({error: check})
+    }else if(check == true){
+        const user = await modifyUser(request.body)
+        response.status(200).send(user)
+    }
+
 }
 
 
