@@ -9,16 +9,7 @@ export async function AdminController(request, response) {
     response.render('admin/adminView.html',{
         title : 'admin',
         h1 : 'Gestion des utilisateurs',
-        pseudo : 'Pseudo :',
-        id : 'ID :',
         users : users,
-        formCreate : 'Générer un utilisateur',
-        formCreateRoom: 'Créer une roomssss',
-        nameRoom : 'nom :',
-        idRoom : 'ID :',
         rooms: rooms,
-        email : 'Email :',
-        password : 'Mot de passe :',
-        defautRoom : 'par defaut :'
     })
 }
