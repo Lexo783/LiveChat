@@ -1,5 +1,9 @@
 import database from "mongoose"
 
+/**
+ * create schéma for message
+ * @type {module:mongoose.Schema<any, Model<any, any, any, any>, any>}
+ */
 const schema = new database.Schema({
     creator: {type: String},
     creatorPseudo: {type: String},

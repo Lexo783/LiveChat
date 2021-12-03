@@ -1,5 +1,9 @@
 import database from 'mongoose'
 
+/**
+ * créate schéma for room
+ * @type {module:mongoose.Schema<any, Model<any, any, any, any>, any>}
+ */
 const schema = new database.Schema({
     name: {type: String},
     defaut:{type: Boolean},
