@@ -1,8 +1,8 @@
 import User from "../../model/User.js";
 
-export async function createUser(email, pseudo, password) {
+export async function createUser(email, pseudo, password, isAdmin) {
     return await User.create({
-        email, pseudo, password
+        email, pseudo, password, isAdmin
     })
 }
 

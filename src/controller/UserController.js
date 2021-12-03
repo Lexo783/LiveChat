@@ -47,7 +47,7 @@ export async function postUser(request, response){
                 if (err !== null) {
                     response.status(500).send(err)
                 }
-                const user = await createUser(request.body.email, request.body.pseudo, hash)
+                const user = await createUser(request.body.email, request.body.pseudo, hash, false)
                 response.status(200).send(user)
             });
         });
